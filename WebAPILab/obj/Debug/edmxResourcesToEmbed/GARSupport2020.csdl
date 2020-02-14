@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GARSupport2020Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_issue" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="time_stamp" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Issue" Relationship="Self.FK__Comment__id_issu__4316F928" FromRole="Comment" ToRole="Issue" />
+  </EntityType>
+  <EntityType Name="Issue">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_client" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="time_stamp" Type="DateTime" Precision="0" />
+    <Property Name="contact_phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="contact_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="classification" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="service_type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="second_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="second_contact" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Comment" Relationship="Self.FK__Comment__id_issu__4316F928" FromRole="Issue" ToRole="Comment" />
+    <NavigationProperty Name="Note" Relationship="Self.FK__Note__id_issue__45F365D3" FromRole="Issue" ToRole="Note" />
+    <NavigationProperty Name="Users_Issue" Relationship="GARSupport2020Model.FK__Users_Iss__id_is__49C3F6B7" FromRole="Issue" ToRole="Users_Issue" />
+  </EntityType>
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_issue" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="time_stamp" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Issue" Relationship="Self.FK__Note__id_issue__45F365D3" FromRole="Note" ToRole="Issue" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="second_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="second_contact" Type="String" MaxLength="240" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users_Issue" Relationship="GARSupport2020Model.FK__Users_Iss__id_us__48CFD27E" FromRole="Users" ToRole="Users_Issue" />
+  </EntityType>
+  <Association Name="FK__Comment__id_issu__4316F928">
+    <End Role="Issue" Type="Self.Issue" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="id_issue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Note__id_issue__45F365D3">
+    <End Role="Issue" Type="Self.Issue" Multiplicity="0..1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="id_issue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GARSupport2020Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Comment" EntityType="Self.Comment" />
+    <EntitySet Name="Issue" EntityType="Self.Issue" />
+    <EntitySet Name="Note" EntityType="Self.Note" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK__Comment__id_issu__4316F928" Association="Self.FK__Comment__id_issu__4316F928">
+      <End Role="Issue" EntitySet="Issue" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Note__id_issue__45F365D3" Association="Self.FK__Note__id_issue__45F365D3">
+      <End Role="Issue" EntitySet="Issue" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <EntitySet Name="Users_Issue" EntityType="GARSupport2020Model.Users_Issue" />
+    <AssociationSet Name="FK__Users_Iss__id_is__49C3F6B7" Association="GARSupport2020Model.FK__Users_Iss__id_is__49C3F6B7">
+      <End Role="Issue" EntitySet="Issue" />
+      <End Role="Users_Issue" EntitySet="Users_Issue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users_Iss__id_us__48CFD27E" Association="GARSupport2020Model.FK__Users_Iss__id_us__48CFD27E">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users_Issue" EntitySet="Users_Issue" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users_Issue">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_users" Type="Int32" />
+    <Property Name="id_issue" Type="Int32" />
+    <NavigationProperty Name="Issue" Relationship="GARSupport2020Model.FK__Users_Iss__id_is__49C3F6B7" FromRole="Users_Issue" ToRole="Issue" />
+    <NavigationProperty Name="Users" Relationship="GARSupport2020Model.FK__Users_Iss__id_us__48CFD27E" FromRole="Users_Issue" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__Users_Iss__id_is__49C3F6B7">
+    <End Type="GARSupport2020Model.Issue" Role="Issue" Multiplicity="0..1" />
+    <End Type="GARSupport2020Model.Users_Issue" Role="Users_Issue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Issue">
+        <PropertyRef Name="id_issue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users_Iss__id_us__48CFD27E">
+    <End Type="GARSupport2020Model.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="GARSupport2020Model.Users_Issue" Role="Users_Issue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Issue">
+        <PropertyRef Name="id_users" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

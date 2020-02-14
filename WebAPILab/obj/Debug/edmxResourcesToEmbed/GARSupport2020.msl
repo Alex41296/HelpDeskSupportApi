@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GARSupport2020ModelStoreContainer" CdmEntityContainer="GARSupport2020Entities">
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="GARSupport2020Model.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_issue" ColumnName="id_issue" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Issue">
+      <EntityTypeMapping TypeName="GARSupport2020Model.Issue">
+        <MappingFragment StoreEntitySet="Issue">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+          <ScalarProperty Name="contact_phone" ColumnName="contact_phone" />
+          <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+          <ScalarProperty Name="classification" ColumnName="classification" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="service_type" ColumnName="service_type" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="second_name" ColumnName="second_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="second_contact" ColumnName="second_contact" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Note">
+      <EntityTypeMapping TypeName="GARSupport2020Model.Note">
+        <MappingFragment StoreEntitySet="Note">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_issue" ColumnName="id_issue" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="time_stamp" ColumnName="time_stamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="GARSupport2020Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="second_name" ColumnName="second_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="second_contact" ColumnName="second_contact" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users_Issue">
+      <EntityTypeMapping TypeName="GARSupport2020Model.Users_Issue">
+        <MappingFragment StoreEntitySet="Users_Issue">
+          <ScalarProperty Name="id_issue" ColumnName="id_issue" />
+          <ScalarProperty Name="id_users" ColumnName="id_users" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

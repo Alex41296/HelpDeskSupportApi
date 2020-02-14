@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GARSupport2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_issue" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+    <Property Name="description" Type="varchar" MaxLength="500" />
+    <Property Name="time_stamp" Type="date" />
+  </EntityType>
+  <EntityType Name="Issue">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_client" Type="int" />
+    <Property Name="description" Type="varchar" MaxLength="500" />
+    <Property Name="time_stamp" Type="date" />
+    <Property Name="contact_phone" Type="varchar" MaxLength="255" />
+    <Property Name="contact_email" Type="varchar" MaxLength="255" />
+    <Property Name="classification" Type="varchar" MaxLength="255" />
+    <Property Name="status" Type="varchar" MaxLength="255" />
+    <Property Name="service_type" Type="varchar" MaxLength="255" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+    <Property Name="second_name" Type="varchar" MaxLength="255" />
+    <Property Name="first_name" Type="varchar" MaxLength="255" />
+    <Property Name="address" Type="varchar" MaxLength="255" />
+    <Property Name="phone" Type="varchar" MaxLength="255" />
+    <Property Name="second_contact" Type="varchar" MaxLength="240" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_issue" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="500" />
+    <Property Name="time_stamp" Type="date" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" />
+    <Property Name="second_name" Type="varchar" MaxLength="255" />
+    <Property Name="first_name" Type="varchar" MaxLength="255" />
+    <Property Name="address" Type="varchar" MaxLength="255" />
+    <Property Name="phone" Type="varchar" MaxLength="255" />
+    <Property Name="second_contact" Type="varchar" MaxLength="240" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="password" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Users_Issue">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_users" Type="int" />
+    <Property Name="id_issue" Type="int" />
+  </EntityType>
+  <Association Name="FK__Comment__id_issu__4316F928">
+    <End Role="Issue" Type="Self.Issue" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="id_issue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Note__id_issue__45F365D3">
+    <End Role="Issue" Type="Self.Issue" Multiplicity="0..1" />
+    <End Role="Note" Type="Self.Note" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Note">
+        <PropertyRef Name="id_issue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users_Iss__id_is__49C3F6B7">
+    <End Role="Issue" Type="Self.Issue" Multiplicity="0..1" />
+    <End Role="Users_Issue" Type="Self.Users_Issue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Issue">
+        <PropertyRef Name="id_issue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users_Iss__id_us__48CFD27E">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Users_Issue" Type="Self.Users_Issue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Issue">
+        <PropertyRef Name="id_users" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GARSupport2020ModelStoreContainer">
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Issue" EntityType="Self.Issue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users_Issue" EntityType="Self.Users_Issue" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Comment__id_issu__4316F928" Association="Self.FK__Comment__id_issu__4316F928">
+      <End Role="Issue" EntitySet="Issue" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Note__id_issue__45F365D3" Association="Self.FK__Note__id_issue__45F365D3">
+      <End Role="Issue" EntitySet="Issue" />
+      <End Role="Note" EntitySet="Note" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users_Iss__id_is__49C3F6B7" Association="Self.FK__Users_Iss__id_is__49C3F6B7">
+      <End Role="Issue" EntitySet="Issue" />
+      <End Role="Users_Issue" EntitySet="Users_Issue" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users_Iss__id_us__48CFD27E" Association="Self.FK__Users_Iss__id_us__48CFD27E">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users_Issue" EntitySet="Users_Issue" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
