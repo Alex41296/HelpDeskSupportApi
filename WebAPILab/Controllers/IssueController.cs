@@ -10,6 +10,41 @@ namespace WebAPILab.Controllers
     public class IssueController: ApiController
     {
 
+        public IHttpActionResult GetAll()
+        {
+            IList<IssueModel> issues = null;
+
+            using (var context = new GARSupport2020Entities())
+            {
+                issues = context.Issue
+                    .Select(issueItem => new IssueModel()
+                    {
+                        Id = issueItem.id,
+                        Id_Client = issueItem.id_client,
+                        Description = issueItem.description,
+                        Time_Stamp = issueItem.time_stamp,
+                        Contact_Phone = issueItem.contact_phone,
+                        Contact_Email = issueItem.contact_email,
+                        Classification = issueItem.classification,
+                        Status = issueItem.status,
+                        Service_Type = issueItem.service_type,
+                        Name = issueItem.name,
+                        First_Name = issueItem.first_name,
+                        Second_Name = issueItem.second_name,
+                        Address = issueItem.address,
+                        Phone = issueItem.phone,
+                        Second_contact = issueItem.second_contact,
+                        Email = issueItem.email
+
+                    }).ToList<IssueModel>();
+            }
+            if (issues.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(issues);
+        }
+
         public IHttpActionResult Post(IssueModel issue)
         {
             using (var context = new GARSupport2020Entities())
