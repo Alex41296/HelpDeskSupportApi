@@ -18,7 +18,7 @@ namespace WebAPILab.Controllers
         [AllowAnonymous]
         public async Task<IHttpActionResult> PostAuthenticate([System.Web.Http.FromBody]UserModel userParam)
         {
-            var user = await _userService.Authenticate(userParam.Username, userParam.Password);
+            var user = await _userService.Authenticate(userParam.Email, userParam.Password);
 
             if (user == null)
                 return BadRequest("Username or password is incorrect");

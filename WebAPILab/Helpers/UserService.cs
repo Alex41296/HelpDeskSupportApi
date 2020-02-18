@@ -17,12 +17,13 @@ namespace WebAPILab.Helpers
         // users hardcoded for simplicity, store in a db with hashed passwords in production applications
         private List<UserModel> _users = new List<UserModel>
         {
-            new UserModel { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" }
+            new UserModel { Id = 1, Name = "Rodri", FirstName = "Alejandro", SecondName = "Soto", Address = "50m oeste escuela Sta Lucía",
+                Phone= "98769485", SecondContact="None", Email="rodrigoalesm@gmail.com", Password="rodri123" }
         };
 
-        public async Task<UserModel> Authenticate(string username, string password)
+        public async Task<UserModel> Authenticate(string email, string password)
         {
-            var user = await Task.Run(() => _users.SingleOrDefault(x => x.Username == username && x.Password == password));
+            var user = await Task.Run(() => _users.SingleOrDefault(x => x.Email == email && x.Password == password));
 
             // return null if user not found
             if (user == null)
