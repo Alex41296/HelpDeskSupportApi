@@ -21,7 +21,7 @@ namespace WebAPILab.Controllers
             var user = await _userService.Authenticate(userParam.Email, userParam.Password);
 
             if (user == null)
-                return BadRequest("Username or password is incorrect");
+                return BadRequest("Usern or password is incorrect");
 
             return Ok(user);
         }
