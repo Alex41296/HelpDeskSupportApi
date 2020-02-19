@@ -281,6 +281,7 @@
     <Compile Include="Comment.cs">
       <DependentUpon>GARSupport2020.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -307,6 +308,7 @@
     <Compile Include="Issue.cs">
       <DependentUpon>GARSupport2020.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Note.cs">

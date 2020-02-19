@@ -7,7 +7,7 @@ using WebAPILab.Models;
 
 namespace WebAPILab.Controllers
 {
-    public class IssueController: ApiController
+    public class IssueController : ApiController
     {
 
         public IHttpActionResult GetAll()
@@ -60,7 +60,7 @@ namespace WebAPILab.Controllers
                     classification = issue.Classification,
                     status = issue.Status,
                     service_type = issue.Service_Type,
-                    name  = issue.Name,
+                    name = issue.Name,
                     second_name = issue.Second_Name,
                     first_name = issue.First_Name,
                     address = issue.Address,
@@ -73,7 +73,7 @@ namespace WebAPILab.Controllers
             return Ok();
         }
 
-
+        [Route("api/issue/{id}")]
         public IHttpActionResult GetById(int id)
         {
             IList<IssueModel> issue = null;
@@ -101,6 +101,46 @@ namespace WebAPILab.Controllers
                         Email = issueItem.email
                     }
                 ).ToList<IssueModel>();
+
+
+            }
+            if (issue == null)
+            {
+                return NotFound();
+            }
+            return Ok(issue);
+        }
+
+
+
+        [Route("api/issue/details/{id}")]
+        public IHttpActionResult GetDetailsById(int id)
+        {
+            IssueModel issue = null;
+            using (var context = new GARSupport2020Entities())
+            {
+                issue = context.Issue
+                    .Where(issueItem => issueItem.id == id)
+                    .Select(issueItem => new IssueModel()
+                    {
+                        Id = issueItem.id,
+                        Id_Client = issueItem.id_client,
+                        Description = issueItem.description,
+                        Time_Stamp = issueItem.time_stamp,
+                        Contact_Phone = issueItem.contact_phone,
+                        Contact_Email = issueItem.contact_email,
+                        Classification = issueItem.classification,
+                        Status = issueItem.status,
+                        Service_Type = issueItem.service_type,
+                        Name = issueItem.name,
+                        First_Name = issueItem.first_name,
+                        Second_Name = issueItem.second_name,
+                        Address = issueItem.address,
+                        Phone = issueItem.phone,
+                        Second_contact = issueItem.second_contact,
+                        Email = issueItem.email
+                    }
+                ).FirstOrDefault<IssueModel>();
 
 
             }
