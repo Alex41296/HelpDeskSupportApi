@@ -31,5 +31,27 @@ namespace WebAPILab.Controllers
             var users = await _userService.GetAll();
             return Ok(users);
         }
+
+        public IHttpActionResult Post(UserModel userCreate)
+        {
+            using (var context = new GARSupport2020Entities())
+            {
+                context.Users.Add(new Users()
+                {
+                    id = userCreate.Id,
+                    name = userCreate.Name,
+                    second_name = userCreate.SecondName,
+                    first_name = userCreate.FirstName,
+                    address = userCreate.Address,
+                    phone = userCreate.Phone,
+                    second_contact = userCreate.SecondContact,
+                    email = userCreate.Email,
+                    password = userCreate.Password,
+
+                });
+                context.SaveChanges();
+            }
+            return Ok();
+        }
     }
 }
