@@ -312,6 +312,7 @@
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UsersIssueModel.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>GARSupport2020.tt</DependentUpon>
     </Compile>
