@@ -285,6 +285,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersIssueController.cs" />
     <Compile Include="GARSupport2020.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
