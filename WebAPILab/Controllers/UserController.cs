@@ -2,6 +2,8 @@
 using WebAPILab.Helpers;
 using WebAPILab.Models;
 using System.Web.Http;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebAPILab.Controllers
 {
@@ -52,6 +54,35 @@ namespace WebAPILab.Controllers
                 context.SaveChanges();
             }
             return Ok();
+        }
+
+        [Route("api/user/support/")]
+        public IHttpActionResult GetAllSupports()
+        {
+            IList<UserModel> user = null;
+
+            using (var context = new GARSupport2020Entities())
+            {
+                user = context.Users
+                    .Select(userItem => new UserModel()
+                    {
+                        Id = userItem.id,
+                        Name = userItem.name,
+                        SecondName = userItem.second_name,
+                        FirstName = userItem.first_name,
+                        Address = userItem.address,
+                        Phone = userItem.phone,
+                        SecondContact = userItem.second_contact,
+                        Email = userItem.email,
+                        Password = userItem.password
+
+                    }).ToList<UserModel>();
+            }
+            if (user.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(user);
         }
     }
 }

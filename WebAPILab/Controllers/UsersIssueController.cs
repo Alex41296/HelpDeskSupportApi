@@ -18,11 +18,15 @@ namespace WebAPILab.Controllers
                 {
                     id = usersIssue.Id,
                     id_users = usersIssue.Id_Users,
-                    id_issue = usersIssue.Id_Users
+                    id_issue = usersIssue.Id_Issue
                 });
                 context.SaveChanges();
             }
             return Ok();
         }
+
+
+
+
     }
 }
