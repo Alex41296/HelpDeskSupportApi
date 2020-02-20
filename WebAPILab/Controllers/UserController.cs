@@ -48,35 +48,54 @@ namespace WebAPILab.Controllers
                     phone = userCreate.Phone,
                     second_contact = userCreate.SecondContact,
                     email = userCreate.Email,
-                    password = userCreate.Password,
-
+                    password = userCreate.Password
                 });
                 context.SaveChanges();
             }
             return Ok();
         }
 
+        [AllowAnonymous]
         [Route("api/user/support/")]
         public IHttpActionResult GetAllSupports()
         {
             IList<UserModel> user = null;
+            IList<UsersRoleModel> usersRole = null;
+
 
             using (var context = new GARSupport2020Entities())
             {
-                user = context.Users
-                    .Select(userItem => new UserModel()
+                usersRole = context.User_Role
+                    .Where(usersRoleItem => usersRoleItem.id_role == 2)
+                    .Select(usersRoleItem => new UsersRoleModel()
                     {
-                        Id = userItem.id,
-                        Name = userItem.name,
-                        SecondName = userItem.second_name,
-                        FirstName = userItem.first_name,
-                        Address = userItem.address,
-                        Phone = userItem.phone,
-                        SecondContact = userItem.second_contact,
-                        Email = userItem.email,
-                        Password = userItem.password
+                        Id_Users = usersRoleItem.id_users
+                    }).ToList<UsersRoleModel>();
+            }
 
-                    }).ToList<UserModel>();
+            using (var context = new GARSupport2020Entities())
+            {
+                foreach (var id_users in usersRole)
+                {
+
+                    user = context.Users
+                   .Where(userItem => userItem.id == id_users.Id_Users)
+                  .Select(userItem => new UserModel()
+                  {
+                      Id = userItem.id,
+                      Name = userItem.name,
+                      SecondName = userItem.second_name,
+                      FirstName = userItem.first_name,
+                      Address = userItem.address,
+                      Phone = userItem.phone,
+                      SecondContact = userItem.second_contact,
+                      Email = userItem.email,
+                      Password = userItem.password
+
+                  }).ToList<UserModel>();
+
+                }
+              
             }
             if (user.Count == 0)
             {
@@ -84,5 +103,40 @@ namespace WebAPILab.Controllers
             }
             return Ok(user);
         }
+
+
+        [AllowAnonymous]
+        [Route("api/user/all/")]
+        public IHttpActionResult GetAllUsers()
+        {
+            IList<UserModel> user = null;
+            
+
+            using (var context = new GARSupport2020Entities())
+            {
+                    user = context.Users
+                  .Select(userItem => new UserModel()
+                  {
+                      Id = userItem.id,
+                      Name = userItem.name,
+                      SecondName = userItem.second_name,
+                      FirstName = userItem.first_name,
+                      Address = userItem.address,
+                      Phone = userItem.phone,
+                      SecondContact = userItem.second_contact,
+                      Email = userItem.email,
+                      Password = userItem.password
+
+                  }).ToList<UserModel>();
+
+                }
+            
+            if (user.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
     }
 }

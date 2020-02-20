@@ -59,6 +59,7 @@
     <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Users_Issue" Relationship="GARSupport2020Model.FK__Users_Iss__id_us__48CFD27E" FromRole="Users" ToRole="Users_Issue" />
+    <NavigationProperty Name="User_Role" Relationship="GARSupport2020Model.FK__User_Role__id_us__52593CB8" FromRole="Users" ToRole="User_Role" />
   </EntityType>
   <Association Name="FK__Comment__id_issu__4316F928">
     <End Role="Issue" Type="Self.Issue" Multiplicity="0..1" />
@@ -106,6 +107,16 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Users_Issue" EntitySet="Users_Issue" />
     </AssociationSet>
+    <EntitySet Name="Role" EntityType="GARSupport2020Model.Role" />
+    <EntitySet Name="User_Role" EntityType="GARSupport2020Model.User_Role" />
+    <AssociationSet Name="FK__User_Role__id_ro__534D60F1" Association="GARSupport2020Model.FK__User_Role__id_ro__534D60F1">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User_Role" EntitySet="User_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User_Role__id_us__52593CB8" Association="GARSupport2020Model.FK__User_Role__id_us__52593CB8">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="User_Role" EntitySet="User_Role" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Users_Issue">
     <Key>
@@ -137,6 +148,48 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Users_Issue">
+        <PropertyRef Name="id_users" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User_Role" Relationship="GARSupport2020Model.FK__User_Role__id_ro__534D60F1" FromRole="Role" ToRole="User_Role" />
+  </EntityType>
+  <EntityType Name="User_Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_users" Type="Int32" />
+    <Property Name="id_role" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="GARSupport2020Model.FK__User_Role__id_ro__534D60F1" FromRole="User_Role" ToRole="Role" />
+    <NavigationProperty Name="Users" Relationship="GARSupport2020Model.FK__User_Role__id_us__52593CB8" FromRole="User_Role" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__User_Role__id_ro__534D60F1">
+    <End Type="GARSupport2020Model.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="GARSupport2020Model.User_Role" Role="User_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User_Role">
+        <PropertyRef Name="id_role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User_Role__id_us__52593CB8">
+    <End Type="GARSupport2020Model.Users" Role="Users" Multiplicity="0..1" />
+    <End Type="GARSupport2020Model.User_Role" Role="User_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User_Role">
         <PropertyRef Name="id_users" />
       </Dependent>
     </ReferentialConstraint>

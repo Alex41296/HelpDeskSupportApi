@@ -16,5 +16,6 @@ namespace WebAPILab.Models
         public string SecondContact { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public IList<string> role { get; set; }
     }
 }
