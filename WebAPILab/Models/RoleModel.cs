@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WebAPILab.Models
 {
-    public class Role
+    public class RoleModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

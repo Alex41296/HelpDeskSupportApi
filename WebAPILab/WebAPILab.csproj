@@ -312,6 +312,7 @@
     </Compile>
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\IssueModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UsersIssueModel.cs" />
     <Compile Include="Models\UsersRoleModel.cs" />
