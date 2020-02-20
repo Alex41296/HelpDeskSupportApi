@@ -70,7 +70,7 @@ namespace WebAPILab.Controllers
             return Ok();
         }
 
-
+        [Route("api/usersrole/{id}")]
         public IHttpActionResult GetById(int id)
         {
             IList<UsersRoleModel> usersRoles = null;
