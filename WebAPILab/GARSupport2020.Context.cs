@@ -30,5 +30,7 @@ namespace WebAPILab
         public virtual DbSet<Note> Note { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Users_Issue> Users_Issue { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<User_Role> User_Role { get; set; }
     }
 }
