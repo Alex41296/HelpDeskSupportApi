@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="GARSupport2020Model.Users" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="GARSupport2020Model.FK__Comment__id_issu__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="GARSupport2020Model.FK__Note__id_issue__45F365D3" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GARSupport2020Model.Users_Issue" Width="1.5" PointX="8" PointY="2.375" />
+        <EntityTypeShape EntityType="GARSupport2020Model.Users_Issue" Width="1.5" PointX="8.875" PointY="3.125" />
         <AssociationConnector Association="GARSupport2020Model.FK__Users_Iss__id_is__49C3F6B7" />
         <AssociationConnector Association="GARSupport2020Model.FK__Users_Iss__id_us__48CFD27E" />
         <EntityTypeShape EntityType="GARSupport2020Model.Role" Width="1.5" PointX="5.75" PointY="6.125" />
