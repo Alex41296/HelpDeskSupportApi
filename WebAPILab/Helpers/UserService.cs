@@ -47,9 +47,9 @@ namespace WebAPILab.Helpers
         //{
         //};
 
-        public async Task<UserModel> Authenticate(string email, string password)
+        public async Task<UserModel> Authenticate(string username, string password)
         {
-            var user = await Task.Run(() => loadUsers().SingleOrDefault(x => x.Email == email && x.Password == password));
+            var user = await Task.Run(() => loadUsers().SingleOrDefault(x => x.Email == username && x.Password == password));
 
             // return null if user not found
             if (user == null)
