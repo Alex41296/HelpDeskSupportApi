@@ -9,7 +9,7 @@ namespace WebAPILab.Helpers
 {
     public interface IUserService
     {
-        Task<UserModel> Authenticate(string username, string password);
+        Task<UserModel> Authenticate(string email, string password);
         Task<IEnumerable<UserModel>> GetAll();
     }
 
@@ -47,9 +47,9 @@ namespace WebAPILab.Helpers
         //{
         //};
 
-        public async Task<UserModel> Authenticate(string username, string password)
+        public async Task<UserModel> Authenticate(string email, string password)
         {
-            var user = await Task.Run(() => loadUsers().SingleOrDefault(x => x.Email == username && x.Password == password));
+            var user = await Task.Run(() => loadUsers().SingleOrDefault(x => x.Email == email && x.Password == password));
 
             // return null if user not found
             if (user == null)
