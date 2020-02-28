@@ -16,7 +16,7 @@ namespace WebAPILab.Controllers
 
             using (var context = new GARSupport2020Entities())
             {
-                issues = context.Issue
+                    issues = context.Issue
                     .Select(issueItem => new IssueModel()
                     {
                         Id = issueItem.id,
@@ -37,6 +37,7 @@ namespace WebAPILab.Controllers
                         Email = issueItem.email
 
                     }).ToList<IssueModel>();
+                
             }
             if (issues.Count == 0)
             {
@@ -77,32 +78,36 @@ namespace WebAPILab.Controllers
         public IHttpActionResult GetById(int id)
         {
             IList<IssueModel> issue = null;
+           
+
             using (var context = new GARSupport2020Entities())
             {
-                issue = context.Issue
-                    .Where(issueItem => issueItem.id_client == id)
-                    .Select(issueItem => new IssueModel()
-                    {
-                        Id = issueItem.id,
-                        Id_Client = issueItem.id_client,
-                        Description = issueItem.description,
-                        Time_Stamp = issueItem.time_stamp,
-                        Contact_Phone = issueItem.contact_phone,
-                        Contact_Email = issueItem.contact_email,
-                        Classification = issueItem.classification,
-                        Status = issueItem.status,
-                        Service_Type = issueItem.service_type,
-                        Name = issueItem.name,
-                        First_Name = issueItem.first_name,
-                        Second_Name = issueItem.second_name,
-                        Address = issueItem.address,
-                        Phone = issueItem.phone,
-                        Second_contact = issueItem.second_contact,
-                        Email = issueItem.email
-                    }
-                ).ToList<IssueModel>();
 
+            
+                    issue = context.Issue
+                        .Where(issueItem => issueItem.id_client == id)
+                        .Select(issueItem => new IssueModel()
+                        {
+                            Id = issueItem.id,
+                            Id_Client = issueItem.id_client,
+                            Description = issueItem.description,
+                            Time_Stamp = issueItem.time_stamp,
+                            Contact_Phone = issueItem.contact_phone,
+                            Contact_Email = issueItem.contact_email,
+                            Classification = issueItem.classification,
+                            Status = issueItem.status,
+                            Service_Type = issueItem.service_type,
+                            Name = issueItem.name,
+                            First_Name = issueItem.first_name,
+                            Second_Name = issueItem.second_name,
+                            Address = issueItem.address,
+                            Phone = issueItem.phone,
+                            Second_contact = issueItem.second_contact,
+                            Email = issueItem.email
+                        }
+                    ).ToList<IssueModel>();
 
+                
             }
             if (issue == null)
             {

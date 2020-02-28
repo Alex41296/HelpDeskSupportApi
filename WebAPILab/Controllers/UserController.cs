@@ -7,18 +7,18 @@ using System.Linq;
 
 namespace WebAPILab.Controllers
 {
-    [Authorize]
-    public class UsersController : ApiController
+     [Authorize]
+    public class UserController : ApiController
     {
         private IUserService _userService;
-
-        public UsersController()
+     
+        public UserController()
         {
-            _userService = new UserService();
+            _userService = new UserService(); 
         }
 
         [AllowAnonymous]
-        public async Task<IHttpActionResult> PostAuthenticate([System.Web.Http.FromBody]UserModel userParam)
+        public async Task<IHttpActionResult> PostAuthenticate([FromBody]UserModel userParam)
         {
             var user = await _userService.Authenticate(userParam.Email, userParam.Password);
 
@@ -33,7 +33,7 @@ namespace WebAPILab.Controllers
             var users = await _userService.GetAll();
             return Ok(users);
         }
-
+        /*
         public IHttpActionResult Post(UserModel userCreate)
         {
             using (var context = new GARSupport2020Entities())
@@ -53,7 +53,7 @@ namespace WebAPILab.Controllers
                 context.SaveChanges();
             }
             return Ok();
-        }
+        }*/
 
         [AllowAnonymous]
         [Route("api/user/support/")]

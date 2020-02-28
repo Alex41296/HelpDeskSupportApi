@@ -5,8 +5,12 @@ using System.Web;
 
 namespace WebAPILab.Models
 {
+    
+
     public class UserModel
     {
+        public UserModel() { }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string FirstName { get; set; }

@@ -10,71 +10,132 @@ namespace WebAPILab.Controllers
 {
     public class UsersRoleController : ApiController
     {
+        
         public IHttpActionResult Post(IList<UsersRoleModel> usersRole)
         {
-            IList<UsersRoleModel> usersRoles = null;
-            foreach (var role in usersRole) {
-                using (var context = new GARSupport2020Entities())
+            
+            int count = 0; 
+            IList<UsersRoleModel> newUsersRoles = null;
+            IList<UsersRoleModel> support = null;
+            using (var context = new GARSupport2020Entities())
+            {
+                foreach (var role in usersRole)
                 {
-                    if (role.Id_Role == 1)
-                    {
-                        // Valida si el existe un usuario con rol supervisor 
-                        usersRoles = context.User_Role
-                       .Where(usersRoleItem => usersRoleItem.id_users == role.Id_Users)
-                       .Select(usersRoleItem => new UsersRoleModel()
-                       {
-                           Id_Role = usersRoleItem.id_role
-                       }
-                       ).ToList<UsersRoleModel>();
-                        //Si el usuario no  es un supervisor lo agrega 
-                        if (usersRole.ToString().Length <= 0)
-                        {
-                            context.User_Role.Add(new User_Role()
-                            {
-                                id = role.Id,
-                                id_users = role.Id_Users,
-                                id_role = role.Id_Role
-                            });
-                            context.SaveChanges();
-                        }
-                    }
-                    else if (role.Id_Role == 2)
-                    {
-                        // Valida si el existe un usuario con rol soporte 
-                        usersRoles = context.User_Role
-                       .Where(usersRoleItem => usersRoleItem.id_users == role.Id_Users)
-                       .Select(usersRoleItem => new UsersRoleModel()
-                       {
-                           Id_Role = usersRoleItem.id_role
-                       }
-                       ).ToList<UsersRoleModel>();
-                        //Si el usuario no  es un soportista lo agrega 
-                        if (usersRole.ToString().Length <= 0)
-                        {
-                            context.User_Role.Add(new User_Role()
-                            {
-                                id = role.Id,
-                                id_users = role.Id_Users,
-                                id_role = role.Id_Role
-                            });
-                            context.SaveChanges();
-                        }
 
-                    } else{  // si no esta lo elimina del role 
-                        var deleteRole = context.User_Role.Where(userItem => userItem.id == role.Id).FirstOrDefault();
-                        context.Entry(deleteRole).State = System.Data.Entity.EntityState.Deleted;
-                        context.SaveChanges();
+
+                    if (count == 0)
+                    {
+                        //verifica si ya existe 
+                        newUsersRoles = context.User_Role
+                       .Where(usersRoleItem => usersRoleItem.id_users == role.Id_Users)
+                       .Select(usersRoleItem => new UsersRoleModel()
+                       {
+                           Id_Role = usersRoleItem.id_role,
+                           Id_Users = usersRoleItem.id_users
+                       }
+                       ).ToList<UsersRoleModel>();
+                        //Si existe lo borra
+                     
+
+                            if (newUsersRoles != null)
+                            {
+                            foreach (var delete in newUsersRoles)
+                            {
+                                var deleteRole = context.User_Role.Where(userItem => userItem.id_users == delete.Id_Users).FirstOrDefault();
+                                context.Entry(deleteRole).State = System.Data.Entity.EntityState.Deleted;
+                                context.SaveChanges();
+                            }
+                            }
+                        
+                        
+                    }
+
+                    count++;
+
+                    context.User_Role.Add(new User_Role()
+                    {
+                        id = role.Id,
+                        id_users = role.Id_Users,
+                        id_role = role.Id_Role
+                    });
+                    context.SaveChanges();
+
+                }
+
+                foreach (var id_user in usersRole)
+                {
+
+                    support = context.User_Role
+                    .Where(usersRoleItem => usersRoleItem.id_users == id_user.Id_Users)
+                    .Select(usersRoleItem => new UsersRoleModel()
+                    {
+                        Id_Users = usersRoleItem.id_users,
+                        Id_Role = usersRoleItem.id_role
+                       
+                    }).ToList<UsersRoleModel>();
+                }
+                //Si el valor es nulo 
+                if (support == null)
+                {
+                    foreach (var delete in usersRole)
+                    {
+                        ///No es sopporte?
+                      
+                            // Verifica si en la tabla userIssue ya tiene un issue asignado
+                            var userDeleted = context.Users_Issue
+                       .Where(usersIssueItem => usersIssueItem.id_users == delete.Id_Users)
+                       .Select(usersIssueItem => new UsersIssueModel()
+                       {
+                           Id_Users = usersIssueItem.id_users,
+
+                       }).FirstOrDefault();
+
+                            // Si existe entra 
+                            if (userDeleted != null)
+                            {
+                                var deleteUser = context.Users_Issue.Where(userItem => userItem.id_users == delete.Id_Users).FirstOrDefault();
+                                context.Entry(deleteUser).State = System.Data.Entity.EntityState.Deleted;
+                                context.SaveChanges();
+                            }
+                        
+                    }
+
+                }
+                else
+                {
+                    foreach (var role in support)
+                    {
+                        ///No es sopporte?
+                        if (role.Id_Role != 2)
+                        {
+                            // Verifica si en la tabla userIssue ya tiene un issue asignado
+                            var issueUser = context.Users_Issue
+                       .Where(usersIssueItem => usersIssueItem.id_users == role.Id_Users)
+                       .Select(usersIssueItem => new UsersIssueModel()
+                       {
+                           Id_Users = usersIssueItem.id_users,
+
+                       }).FirstOrDefault();
+
+                            // Si existe entra 
+                            if (issueUser != null)
+                            {
+                                var deleteUser = context.Users_Issue.Where(userItem => userItem.id_users == role.Id_Users).FirstOrDefault();
+                                context.Entry(deleteUser).State = System.Data.Entity.EntityState.Deleted;
+                                context.SaveChanges();
+                            }
+                        }
                     }
                 }
             }
+
             return Ok();
         }
 
-        [Route("api/usersrole/{id}")]
+        [Route("api/usersrole/insert/{id}")]
         public IHttpActionResult GetById(int id)
         {
             IList<UsersRoleModel> usersRoles = null;
-            IList<RoleModel> roles = null;
             using (var context = new GARSupport2020Entities())
             {
                 usersRoles = context.User_Role

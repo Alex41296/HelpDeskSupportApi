@@ -13,6 +13,8 @@ namespace WebAPILab.Helpers
         Task<IEnumerable<UserModel>> GetAll();
     }
 
+
+
     public class UserService : IUserService
     {
         public IList<UserModel> loadUsers()
