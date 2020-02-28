@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8365758901e94f86bb355820ec23adb6" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="8365758901e94f86bb355820ec23adb6" Name="Diagram1" ZoomLevel="68">
         <EntityTypeShape EntityType="GARSupport2020Model.Comment" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="GARSupport2020Model.Issue" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="GARSupport2020Model.Note" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
@@ -15,7 +15,7 @@
         <AssociationConnector Association="GARSupport2020Model.FK__Users_Iss__id_is__49C3F6B7" />
         <AssociationConnector Association="GARSupport2020Model.FK__Users_Iss__id_us__48CFD27E" />
         <EntityTypeShape EntityType="GARSupport2020Model.Role" Width="1.5" PointX="5.75" PointY="6.125" />
-        <EntityTypeShape EntityType="GARSupport2020Model.User_Role" Width="1.5" PointX="8" PointY="0.75" />
+        <EntityTypeShape EntityType="GARSupport2020Model.User_Role" Width="1.5" PointX="10.75" PointY="2" />
         <AssociationConnector Association="GARSupport2020Model.FK__User_Role__id_ro__534D60F1" />
         <AssociationConnector Association="GARSupport2020Model.FK__User_Role__id_us__52593CB8" />
       </Diagram>

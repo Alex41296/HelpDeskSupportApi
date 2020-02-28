@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\Alexander\Desktop\Lenguajes\Proyecto\HelpDeskSupportApi\WebAPILab\GARSupport2020.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\rodri\OneDrive\Escritorio\LENGUAJES - 2020\HelpDeskSupportApi3\HelpDeskSupportApi\WebAPILab\GARSupport2020.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

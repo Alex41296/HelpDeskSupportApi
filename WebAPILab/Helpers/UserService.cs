@@ -9,7 +9,7 @@ namespace WebAPILab.Helpers
 {
     public interface IUserService
     {
-        Task<UserModel> Authenticate(string username, string password);
+        Task<UserModel> Authenticate(string email, string password);
         Task<IEnumerable<UserModel>> GetAll();
     }
 
